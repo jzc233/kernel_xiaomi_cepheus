@@ -2937,12 +2937,16 @@ static int aw8697_parse_dt(struct device *dev, struct aw8697 *aw8697,
 		rc = of_property_read_u8_array(child_node, "qcom,wf-pattern",
 					       effect->pattern,
 					       effect->pattern_length);
+		rc = of_property_read_u8_array(child_node, "qcom,wf-pattern",
+					       effect->pattern,
+					       effect->pattern_length);
 		if (rc < 0) {
 			printk("%s Read qcom,wf-pattern property failed !\n",
 			       __func__);
 		}
-		printk("%s %d  effect->pattern_length=%d  effect->pattern=%d \n", __func__, __LINE__,
-			effect->pattern_length, (int)effect->pattern);
+		printk("%s %d  effect->pattern_length=%d  effect->pattern=%d \n",
+		       __func__, __LINE__, effect->pattern_length,
+		       (int)effect->pattern);
 
 		effect->play_rate_us = config->play_rate_us;
 		rc = of_property_read_u32(child_node, "qcom,wf-play-rate-us",
@@ -2952,7 +2956,8 @@ static int aw8697_parse_dt(struct device *dev, struct aw8697 *aw8697,
 			       __func__);
 		else
 			effect->play_rate_us = tmp;
-		printk("%s ---%d effect->play_rate_us=%d \n", __func__, __LINE__, effect->play_rate_us);
+		printk("%s ---%d effect->play_rate_us=%d \n", __func__,
+		       __LINE__, effect->play_rate_us);
 
 		rc = of_property_read_u32(child_node, "qcom,wf-repeat-count",
 					  &tmp);
